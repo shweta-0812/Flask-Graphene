@@ -1,0 +1,37 @@
+version: "3"
+services:
+
+  server:
+    container_name: flask_app
+    build: .
+    ports: ['5000:5000']
+    volumes: ['.:/usr/src/app']
+    restart: always
+    environment:
+      ENV: DEVELOPMENT
+      DB_USERNAME: my_user
+      DB_PASSWORD: user#passed
+      DB_DATABASE: customer
+      DB_HOST: database
+    links:
+      - database
+
+  database:
+    container_name: mysql_db
+    platform: linux/x86_64
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: customer
+      MYSQL_USER: my_user
+      MYSQL_PASSWORD: user#passed
+      MYSQL_ROOT_PASSWORD: rootuser#passed
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - flask-db:/var/lib/mysql
+
+volumes:
+  flask-db:
