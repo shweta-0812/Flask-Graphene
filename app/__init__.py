@@ -1,6 +1,7 @@
+import logging
 from config import Config
 
-from flask import Flask, jsonify
+from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_graphql import GraphQLView
@@ -15,6 +16,9 @@ def create_app():
     CORS(app)
     app.config.from_object((set_environment_config()))
 
+    # set log level as Debug to print logs
+    logging.basicConfig(level=logging.DEBUG)
+
     db.init_app(app)
 
     # initialise models
@@ -28,8 +32,7 @@ def create_app():
 
     @app.route('/')
     def hello_world():
-        app.logger.debug("home route")
-        return "Hello World"
+        return "Hello My Flask Application which supports GraphQL APIs using Graphene"
 
     from app.schema import schema
 

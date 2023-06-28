@@ -1,7 +1,6 @@
-from graphene import ObjectType
-
 from .GetClient import GetClient
+from .GetClient import ClientType
 
 
-class ClientQuery(GetClient, ObjectType):
+class ClientQuery(GetClient):
     pass

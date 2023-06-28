@@ -1,7 +1,11 @@
 from graphene import AbstractType
 
-from .RegisterClient import RegisterClient
+from .AddClient import AddClient
+# from .UpdateClient import UpdateClient
+# from .DeleteClient import DeleteClient
 
 
 class ClientMutation(AbstractType):
-    register_client = RegisterClient.Field()
+    add_client = AddClient.Field()
+    # update_client = UpdateClient.Field()
+    # delete_client = DeleteClient.Field()
